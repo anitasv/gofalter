@@ -17,14 +17,12 @@ func NewAssoc(ident LispSymbol, expr LispExpr) Assoc {
 	return a
 }
 
-func NewAssocPrimitive(ident string, expr string) *Assoc {
+func NewAssocPrimitive(ident string, expr string) Assoc {
 	parsedExpr, ok := Parse(NewLispScanner(expr))
 	if ok {
-		newAssoc := NewAssoc(LispSymbol(ident), parsedExpr)
-		return &newAssoc
+		return NewAssoc(LispSymbol(ident), parsedExpr)
 	} else {
-		fmt.Println("Internal Error, Can't parse", expr, parsedExpr)
-		return nil
+		panic(fmt.Sprintf("Internal Error, Can't parse %s %s", expr, parsedExpr))
 	}
 }
 
