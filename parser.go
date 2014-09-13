@@ -9,7 +9,7 @@ func Parse(scanner *bufio.Scanner) (LispExpr, bool) {
 	for scanner.Scan() {
 		tok := scanner.Text()
 
-		if scanner.Text() == "(" {
+		if tok == "(" {
 			return ConsumeList(scanner)
 		} else {
 			return LispSymbol(tok), true
