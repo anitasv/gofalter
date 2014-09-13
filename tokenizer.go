@@ -3,7 +3,7 @@ package main
 import (
 	"bufio"
 	"strings"
-  "unicode"
+	"unicode"
 	"unicode/utf8"
 )
 
