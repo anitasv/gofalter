@@ -63,11 +63,11 @@ func isSpace(r rune) bool {
   return false
 }
 
-function isParan(r rune) bool {
+func isParan(r rune) bool {
   return r == ')' || r == '('
 }
 
-return func (data []byte, atEOF bool) (advance int, token []byte, err error) {
+func ScanTokens(data []byte, atEOF bool) (advance int, token []byte, err error) {
   // Skip leading spaces.
   start := 0
 
