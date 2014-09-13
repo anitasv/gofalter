@@ -120,14 +120,9 @@ func (l LispList) Cdr() LispList {
 	}
 }
 
-func (l LispSymbol) Equal(expr LispExpr) bool {
+func (s LispSymbol) Equal(expr LispExpr) bool {
 	other, ok := expr.(LispSymbol)
-	if ok {
-		if l == other {
-			return true
-		}
-	}
-	return false
+	return ok && s == other
 }
 
 func (l LispList) Equal(expr LispExpr) bool {
