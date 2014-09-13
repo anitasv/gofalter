@@ -4,15 +4,6 @@ import (
 	"fmt"
 )
 
-func (env Env) Lookup(ident LispSymbol) LispExpr {
-	for _, item := range env {
-		if item.ident == ident {
-			return item.expr
-		}
-	}
-	panic(fmt.Sprintf("Identifier: %s not defined", ident))
-}
-
 func (l LispList) Eval(env Env) LispExpr {
 	if len(l) == 0 { // nil
 		return l

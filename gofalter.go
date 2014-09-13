@@ -14,16 +14,8 @@ func main() {
 	if ok {
 		fmt.Println(expr)
 
-		env := Env{
-			NewAssocPrimitive("nil", "()"),
-			NewAssocPrimitive("T", "T"),
-			NewAssocPrimitive("cadr", "(lambda (x) (car (cdr x)))"),
-			NewAssocPrimitive("caddr", "(lambda (x) (car (cdr (cdr x))))"),
-			NewAssocPrimitive("caar", "(lambda (x) (car (car x)))"),
-			NewAssocPrimitive("cadar", "(lambda (x) (car (cdr (car x))))"),
-			NewAssocPrimitive("caddar", "(lambda (x) (car (cdr (cdr (car x)))))"),
-			NewAssocPrimitive("null", "(lambda (x) (equal x nil))"),
-		}
+		env := NewEnv()
+
 		result := expr.Eval(env)
 		fmt.Println(result)
 	} else {

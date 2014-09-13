@@ -35,3 +35,25 @@ func (env Env) Augment(aug Env) Env {
 	copy(newEnv, aug)
 	return newEnv
 }
+
+func (env Env) Lookup(ident LispSymbol) LispExpr {
+	for _, item := range env {
+		if item.ident == ident {
+			return item.expr
+		}
+	}
+	panic(fmt.Sprintf("Identifier: %s not defined", ident))
+}
+
+func NewEnv() Env {
+	return Env{
+		NewAssocPrimitive("nil", "()"),
+		NewAssocPrimitive("T", "T"),
+		NewAssocPrimitive("cadr", "(lambda (x) (car (cdr x)))"),
+		NewAssocPrimitive("caddr", "(lambda (x) (car (cdr (cdr x))))"),
+		NewAssocPrimitive("caar", "(lambda (x) (car (car x)))"),
+		NewAssocPrimitive("cadar", "(lambda (x) (car (cdr (car x))))"),
+		NewAssocPrimitive("caddar", "(lambda (x) (car (cdr (cdr (car x)))))"),
+		NewAssocPrimitive("null", "(lambda (x) (equal x nil))"),
+	}
+}
