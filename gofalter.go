@@ -24,12 +24,7 @@ func main() {
 			*NewAssocPrimitive("caddar", "(lambda (x) (car (cdr (cdr (car x)))))"),
 			*NewAssocPrimitive("null", "(lambda (x) (equal x nil))"),
 		}
-		result, err := expr.Eval(env)
-
-		if err != nil {
-			fmt.Println(err.Error())
-			return
-		}
+		result := expr.Eval(env)
 		fmt.Println(result)
 	} else {
 		fmt.Println("Parsing Failed")

@@ -9,15 +9,15 @@ type LispExpr interface {
 
 	Nil() LispExpr
 
-	Car() (LispExpr, error)
+	Car() LispExpr
 
-	Cdr() (LispList, error)
+	Cdr() LispList
 
-	Cons(expr LispExpr) (LispList, error)
+	Cons(expr LispExpr) LispList
 
-	Eval(env Env) (LispExpr, error)
+	Eval(env Env) LispExpr
 
-	Call(args LispList, env Env) (LispExpr, error)
+	Call(args LispList, env Env) LispExpr
 
 	// Debugging and final printing purpose.
 	String() string
@@ -80,37 +80,37 @@ func (l LispList) Nil() LispExpr {
 	return l.Atom()
 }
 
-func (s LispSymbol) Car() (LispExpr, error) {
-	return nil, CompileError("car is not permitted for symbol")
+func (s LispSymbol) Car() LispExpr {
+	panic("car is not permitted for symbol")
 }
 
-func (l LispList) Car() (LispExpr, error) {
+func (l LispList) Car() LispExpr {
 	if len(l) > 0 {
-		return l[0], nil
+		return l[0]
 	} else {
-		return nil, CompileError("car on nil not permitted")
+		panic("car on nil not permitted")
 	}
 }
 
-func (s LispSymbol) Cons(expr LispExpr) (LispList, error) {
-	return nil, CompileError("cons is not permitted for symbol")
+func (s LispSymbol) Cons(expr LispExpr) LispList {
+	panic("cons is not permitted for symbol")
 }
 
-func (l LispList) Cons(expr LispExpr) (LispList, error) {
+func (l LispList) Cons(expr LispExpr) LispList {
 	newL := make(LispList, len(l)+1, len(l)+1)
 	copy(newL[1:], l)
 	newL[0] = expr
-	return newL, nil
+	return newL
 }
 
-func (s LispSymbol) Cdr() (LispList, error) {
-	return nil, CompileError("cdr is not permitted for symbol")
+func (s LispSymbol) Cdr() LispList {
+	panic("cdr is not permitted for symbol")
 }
 
-func (l LispList) Cdr() (LispList, error) {
+func (l LispList) Cdr() LispList {
 	if len(l) > 0 {
-		return l[1:], nil
+		return l[1:]
 	} else {
-		return nil, CompileError("cdr not permitted on nil")
+		panic("cdr not permitted on nil")
 	}
 }
