@@ -19,10 +19,10 @@ type LispExpr interface {
 
 	Call(args LispList, env Env) LispExpr
 
-  Eq(expr LispExpr) LispExpr
+	Eq(expr LispExpr) LispExpr
 
-  // Implementing Equaler interface
-  Equal(expr LispExpr) bool
+	// Implementing Equaler interface
+	Equal(expr LispExpr) bool
 
 	// Debugging and final printing purpose.
 	String() string
@@ -121,45 +121,44 @@ func (l LispList) Cdr() LispList {
 }
 
 func (l LispSymbol) Equal(expr LispExpr) bool {
-  other, ok := expr.(LispSymbol)
-  if ok {
-    if l == other {
-      return true
-    }
-  }
-  return false
+	other, ok := expr.(LispSymbol)
+	if ok {
+		if l == other {
+			return true
+		}
+	}
+	return false
 }
 
 func (l LispList) Equal(expr LispExpr) bool {
-  other, ok := expr.(LispList)
-  if ok {
-    if len(other) != len(l) {
-      return false
-    }
-    for i, a := range (l) {
-      b := other[i]
-      if !a.Equal(b) {
-        return false
-      }
-    }
-    return true
-  }
-  return false
+	other, ok := expr.(LispList)
+	if ok {
+		if len(other) != len(l) {
+			return false
+		}
+		for i, a := range l {
+			b := other[i]
+			if !a.Equal(b) {
+				return false
+			}
+		}
+		return true
+	}
+	return false
 }
 
 func (l LispSymbol) Eq(expr LispExpr) LispExpr {
-  if l.Equal(expr) {
-    return LISP_TRUE
-  } else {
-    return LISP_FALSE
-  }
+	if l.Equal(expr) {
+		return LISP_TRUE
+	} else {
+		return LISP_FALSE
+	}
 }
 
 func (l LispList) Eq(expr LispExpr) LispExpr {
-  if l.Equal(expr) {
-    return LISP_TRUE
-  } else {
-    return LISP_FALSE
-  }
+	if l.Equal(expr) {
+		return LISP_TRUE
+	} else {
+		return LISP_FALSE
+	}
 }
-

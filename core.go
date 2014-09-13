@@ -35,8 +35,8 @@ func (fnName LispSymbol) Call(args LispList, env Env) LispExpr {
 		return args[0].Eval(env).Atom()
 	case "cons":
 		return args[1].Eval(env).Cons(args[0].Eval(env))
-  case "equal":
-    return args[0].Eval(env).Eq(args[1].Eval(env))
+	case "equal":
+		return args[0].Eval(env).Eq(args[1].Eval(env))
 	case "quote":
 		return args[0] // The magical non eval call
 	case "cond":
